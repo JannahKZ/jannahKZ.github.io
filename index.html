@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nurul Jannah - About</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+    
     <script>
         // Custom Tailwind config mapped to CSS variables for dynamic theme switching
         tailwind.config = {
@@ -20,6 +24,7 @@
                         bordercol: 'rgba(var(--color-bordercol), <alpha-value>)',
                     },
                     boxShadow: {
+                        'neon-sm': '0 0 10px rgba(var(--color-neon), 0.3)',
                         'neon': '0 0 10px rgba(var(--color-neon), 0.5), 0 0 20px rgba(var(--color-neon), 0.3)',
                     }
                 }
@@ -240,6 +245,86 @@
                     </div>
                 </div>
 
+                <h3 class="text-2xl font-bold text-tmain mb-6 mt-12 transition-colors duration-500">Tech Stack</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
+                    
+                    <div class="bg-deep/70 p-6 rounded-2xl border border-bordercol/10 shadow-lg transition-colors duration-500 hover:border-neon/50">
+                        <h4 class="text-tmain font-bold mb-4 flex items-center gap-2 transition-colors duration-500">
+                            <span class="text-xl">🌐</span> Frontend
+                        </h4>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="px-3 py-2 bg-panel border border-bordercol/10 text-tmuted rounded-lg shadow-sm text-sm font-medium flex items-center gap-2 transition-all duration-300 hover:text-neon hover:border-neon hover:-translate-y-1 hover:shadow-neon-sm cursor-default">
+                                <i class="devicon-html5-plain colored text-lg"></i> HTML5
+                            </span>
+                            <span class="px-3 py-2 bg-panel border border-bordercol/10 text-tmuted rounded-lg shadow-sm text-sm font-medium flex items-center gap-2 transition-all duration-300 hover:text-neon hover:border-neon hover:-translate-y-1 hover:shadow-neon-sm cursor-default">
+                                <i class="devicon-css3-plain colored text-lg"></i> CSS3
+                            </span>
+                            <span class="px-3 py-2 bg-panel border border-bordercol/10 text-tmuted rounded-lg shadow-sm text-sm font-medium flex items-center gap-2 transition-all duration-300 hover:text-neon hover:border-neon hover:-translate-y-1 hover:shadow-neon-sm cursor-default">
+                                <i class="devicon-tailwindcss-plain colored text-lg"></i> Tailwind
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="bg-deep/70 p-6 rounded-2xl border border-bordercol/10 shadow-lg transition-colors duration-500 hover:border-neon/50">
+                        <h4 class="text-tmain font-bold mb-4 flex items-center gap-2 transition-colors duration-500">
+                            <span class="text-xl">⚙️</span> Backend
+                        </h4>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="px-3 py-2 bg-panel border border-bordercol/10 text-tmuted rounded-lg shadow-sm text-sm font-medium flex items-center gap-2 transition-all duration-300 hover:text-neon hover:border-neon hover:-translate-y-1 hover:shadow-neon-sm cursor-default">
+                                <i class="devicon-php-plain colored text-lg"></i> PHP
+                            </span>
+                            <span class="px-3 py-2 bg-panel border border-bordercol/10 text-tmuted rounded-lg shadow-sm text-sm font-medium flex items-center gap-2 transition-all duration-300 hover:text-neon hover:border-neon hover:-translate-y-1 hover:shadow-neon-sm cursor-default">
+                                <i class="devicon-laravel-plain colored text-lg"></i> Laravel
+                            </span>
+                            <span class="px-3 py-2 bg-panel border border-bordercol/10 text-tmuted rounded-lg shadow-sm text-sm font-medium flex items-center gap-2 transition-all duration-300 hover:text-neon hover:border-neon hover:-translate-y-1 hover:shadow-neon-sm cursor-default">
+                                <i class="devicon-dot-net-plain-wordmark colored text-lg"></i> ASP.NET
+                            </span>
+                            <span class="px-3 py-2 bg-panel border border-bordercol/10 text-tmuted rounded-lg shadow-sm text-sm font-medium flex items-center gap-2 transition-all duration-300 hover:text-neon hover:border-neon hover:-translate-y-1 hover:shadow-neon-sm cursor-default">
+                                <i class="devicon-csharp-plain colored text-lg"></i> C#
+                            </span>
+                            <span class="px-3 py-2 bg-panel border border-bordercol/10 text-tmuted rounded-lg shadow-sm text-sm font-medium flex items-center gap-2 transition-all duration-300 hover:text-neon hover:border-neon hover:-translate-y-1 hover:shadow-neon-sm cursor-default">
+                                <i class="devicon-java-plain colored text-lg"></i> Java
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="bg-deep/70 p-6 rounded-2xl border border-bordercol/10 shadow-lg transition-colors duration-500 hover:border-neon/50">
+                        <h4 class="text-tmain font-bold mb-4 flex items-center gap-2 transition-colors duration-500">
+                            <span class="text-xl">📱</span> Mobile & Tools
+                        </h4>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="px-3 py-2 bg-panel border border-bordercol/10 text-tmuted rounded-lg shadow-sm text-sm font-medium flex items-center gap-2 transition-all duration-300 hover:text-neon hover:border-neon hover:-translate-y-1 hover:shadow-neon-sm cursor-default">
+                                <i class="devicon-flutter-plain colored text-lg"></i> Flutter
+                            </span>
+                            <span class="px-3 py-2 bg-panel border border-bordercol/10 text-tmuted rounded-lg shadow-sm text-sm font-medium flex items-center gap-2 transition-all duration-300 hover:text-neon hover:border-neon hover:-translate-y-1 hover:shadow-neon-sm cursor-default">
+                                <i class="devicon-dart-plain colored text-lg"></i> Dart
+                            </span>
+                            <span class="px-3 py-2 bg-panel border border-bordercol/10 text-tmuted rounded-lg shadow-sm text-sm font-medium flex items-center gap-2 transition-all duration-300 hover:text-neon hover:border-neon hover:-translate-y-1 hover:shadow-neon-sm cursor-default">
+                                <i class="devicon-git-plain colored text-lg"></i> Git
+                            </span>
+                            <span class="px-3 py-2 bg-panel border border-bordercol/10 text-tmuted rounded-lg shadow-sm text-sm font-medium flex items-center gap-2 transition-all duration-300 hover:text-neon hover:border-neon hover:-translate-y-1 hover:shadow-neon-sm cursor-default">
+                                <i class="devicon-github-original text-tmain text-lg transition-colors duration-500"></i> GitHub
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="bg-deep/70 p-6 rounded-2xl border border-bordercol/10 shadow-lg transition-colors duration-500 hover:border-neon/50">
+                        <h4 class="text-tmain font-bold mb-4 flex items-center gap-2 transition-colors duration-500">
+                            <span class="text-xl">🗄️</span> Databases
+                        </h4>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="px-3 py-2 bg-panel border border-bordercol/10 text-tmuted rounded-lg shadow-sm text-sm font-medium flex items-center gap-2 transition-all duration-300 hover:text-neon hover:border-neon hover:-translate-y-1 hover:shadow-neon-sm cursor-default">
+                                <i class="devicon-mysql-plain colored text-lg"></i> MySQL
+                            </span>
+                            <span class="px-3 py-2 bg-panel border border-bordercol/10 text-tmuted rounded-lg shadow-sm text-sm font-medium flex items-center gap-2 transition-all duration-300 hover:text-neon hover:border-neon hover:-translate-y-1 hover:shadow-neon-sm cursor-default">
+                                <i class="devicon-postgresql-plain colored text-lg"></i> PostgreSQL
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+
                 <footer class="mt-auto pt-10 pb-2 text-center md:text-right text-tmuted text-sm transition-colors duration-500">
                     &copy; 2026 <span class="text-tmain font-bold transition-colors duration-500">Nurul Jannah</span>. 
                 </footer>
@@ -247,7 +332,7 @@
             </div> 
         </main> 
     </div> 
-    
+
     <button id="scrollTopBtn" onclick="scrollToTop()" class="fixed bottom-6 right-6 w-12 h-12 bg-deep border border-bordercol/20 rounded-full flex items-center justify-center text-neon shadow-neon-sm opacity-0 pointer-events-none transition-all duration-300 z-50 hover:-translate-y-1 hover:bg-bordercol/10">
         <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
@@ -261,13 +346,11 @@
         const leafContainer = document.getElementById('leaf-container');
         const themeIcon = document.getElementById('theme-icon');
 
-        // Check local storage on load (DEFAULTS TO LIGHT)
         const savedTheme = localStorage.getItem('portfolioTheme');
         
         if(savedTheme === 'dark') {
             enableDarkMode();
         } else {
-            // If no saved theme, default to Light Theme
             enableLightMode();
         }
 
@@ -303,7 +386,6 @@
             if(meteorContainer.children.length === 0) createMeteors();
         }
 
-        // Generate Meteors
         function createMeteors() {
             const screenWidth = window.innerWidth;
             const meteorCount = screenWidth < 768 ? 10 : 25; 
@@ -311,18 +393,14 @@
             for(let i = 0; i < meteorCount; i++) {
                 let meteor = document.createElement('div');
                 meteor.className = 'meteor animate-meteor';
-                
                 meteor.style.top = (Math.random() * 100 - 20) + 'vh'; 
                 meteor.style.left = (Math.random() * 100 + 30) + 'vw'; 
-                
                 meteor.style.animationDuration = (Math.random() * 2 + 1.5) + 's';
                 meteor.style.animationDelay = (Math.random() * 6) + 's';
-                
                 meteorContainer.appendChild(meteor);
             }
         }
 
-        // Generate Leaves
         function createLeaves() {
             const leaves = ['🍂', '🍁', '🍃'];
             const screenWidth = window.innerWidth;
@@ -332,24 +410,20 @@
                 let leaf = document.createElement('div');
                 leaf.innerText = leaves[Math.floor(Math.random() * leaves.length)];
                 leaf.className = 'absolute opacity-70 animate-fall';
-                
                 const size = Math.random() * 1.5 + 1; 
                 leaf.style.fontSize = size + 'rem';
                 leaf.style.left = Math.random() * 100 + 'vw';
                 leaf.style.top = '-10vh';
                 leaf.style.animationDuration = (Math.random() * 5 + 5) + 's'; 
                 leaf.style.animationDelay = (Math.random() * 5) + 's'; 
-                
                 leafContainer.appendChild(leaf);
             }
         }
 
-        // --- SCROLL TO TOP LOGIC ---
         const scrollTopBtn = document.getElementById('scrollTopBtn');
         const mainScrollContainer = document.querySelector('main');
 
         function checkScroll() {
-            // Check both window scroll (mobile) and main container scroll (desktop)
             const scrollPos = window.scrollY || mainScrollContainer.scrollTop;
             if (scrollPos > 200) {
                 scrollTopBtn.classList.remove('opacity-0', 'pointer-events-none');
@@ -358,12 +432,10 @@
             }
         }
 
-        // Listen to both environments
         window.addEventListener('scroll', checkScroll);
         mainScrollContainer.addEventListener('scroll', checkScroll);
 
         function scrollToTop() {
-            // Smoothly scroll both possible containers
             window.scrollTo({ top: 0, behavior: 'smooth' });
             mainScrollContainer.scrollTo({ top: 0, behavior: 'smooth' });
         }
