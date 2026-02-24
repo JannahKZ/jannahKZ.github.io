@@ -6,112 +6,195 @@
     <title>Nurul Jannah - About</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
+        // Custom Tailwind config mapped to CSS variables for dynamic theme switching
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        deep: '#050A18',
-                        panel: '#112240',
-                        neon: '#00f3ff',
-                        tab: '#1e293b',
+                        deep: 'rgba(var(--color-deep), <alpha-value>)',
+                        panel: 'rgba(var(--color-panel), <alpha-value>)',
+                        neon: 'rgba(var(--color-neon), <alpha-value>)',
+                        tab: 'rgba(var(--color-tab), <alpha-value>)',
+                        tmain: 'rgba(var(--color-tmain), <alpha-value>)',
+                        tmuted: 'rgba(var(--color-tmuted), <alpha-value>)',
+                        bordercol: 'rgba(var(--color-bordercol), <alpha-value>)',
                     },
                     boxShadow: {
-                        'neon': '0 0 10px rgba(0, 243, 255, 0.5), 0 0 20px rgba(0, 243, 255, 0.3)',
+                        'neon': '0 0 10px rgba(var(--color-neon), 0.5), 0 0 20px rgba(var(--color-neon), 0.3)',
                     }
                 }
             }
         }
     </script>
     <style>
+        /* CSS VARIABLES FOR THEMES */
+        :root {
+            /* DARK THEME */
+            --color-deep: 5, 10, 24;       /* #050A18 */
+            --color-panel: 17, 34, 64;     /* #112240 */
+            --color-neon: 0, 243, 255;     /* Cyan */
+            --color-tab: 30, 41, 59;       /* #1e293b */
+            --color-tmain: 255, 255, 255;  /* White Text */
+            --color-tmuted: 148, 163, 184; /* Slate-400 */
+            --color-bordercol: 255, 255, 255; 
+        }
+
+        /* LIGHT AUTUMN THEME (Now Default via body class) */
+        body.theme-light {
+            --color-deep: 253, 246, 227;   /* Warm Cream */
+            --color-panel: 255, 255, 255;  /* Pure White */
+            --color-neon: 234, 88, 12;     /* Autumn Orange */
+            --color-tab: 255, 237, 213;    /* Light Orange Tab */
+            --color-tmain: 15, 23, 42;     /* Dark Slate Text */
+            --color-tmuted: 71, 85, 105;   /* Medium Slate */
+            --color-bordercol: 0, 0, 0;    /* Black for subtle borders */
+        }
+
         /* Mobile-responsive scrolling */
         ::-webkit-scrollbar { width: 0px; background: transparent; }
         .file-tab { border-bottom-left-radius: 1.5rem; }
+
+        /* NIGHT SKY - MOVING & TWINKLING STARS */
+        .bg-stars {
+            background-image: 
+                radial-gradient(2px 2px at 10% 20%, rgba(255,255,255,0.9), rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 30% 60%, rgba(255,255,255,0.8), rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 60% 10%, rgba(255,255,255,0.9), rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 80% 80%, rgba(255,255,255,0.8), rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 90% 30%, rgba(255,255,255,0.9), rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 40% 40%, rgba(255,255,255,0.6), rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 70% 50%, rgba(255,255,255,0.6), rgba(0,0,0,0));
+            background-size: 200px 200px;
+            animation: twinkle 4s infinite alternate, pan-stars 120s linear infinite;
+        }
+
+        /* METEOR CSS */
+        .meteor {
+            position: absolute;
+            width: 150px;
+            height: 2px;
+            background: linear-gradient(to right, rgba(0,243,255,0), rgba(0,243,255,1));
+            border-radius: 999px;
+            filter: drop-shadow(0 0 6px rgba(0,243,255,0.8));
+            opacity: 0;
+        }
+
+        /* KEYFRAMES */
+        @keyframes twinkle {
+            0% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+        @keyframes pan-stars {
+            0% { background-position: 0 0; }
+            100% { background-position: -500px 500px; }
+        }
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        }
+        @keyframes meteor-shower {
+            0% { opacity: 0; transform: rotate(-45deg) translateX(0); }
+            10% { opacity: 1; }
+            20% { opacity: 0; transform: rotate(-45deg) translateX(-625px); } 
+            100% { opacity: 0; }
+        }
+
+        .animate-fall { animation: fall linear infinite; }
+        .animate-meteor { animation: meteor-shower linear infinite; }
     </style>
 </head>
-<body class="bg-deep text-slate-300 font-sans antialiased min-h-screen py-8 px-4 md:p-8 flex items-center justify-center relative">
+<body class="theme-light bg-deep text-tmuted font-sans antialiased min-h-screen py-8 px-4 md:p-8 flex items-center justify-center relative transition-colors duration-500">
 
-    <div class="flex flex-col md:flex-row max-w-7xl w-full gap-6 h-auto md:h-[90vh]">
+    <div id="stars-layer" class="fixed inset-0 bg-stars transition-opacity duration-500 pointer-events-none z-0 opacity-0"></div>
+    <div id="meteor-container" class="fixed inset-0 overflow-hidden pointer-events-none z-0 transition-opacity duration-500 hidden"></div>
+    <div id="leaf-container" class="fixed inset-0 overflow-hidden pointer-events-none z-0 transition-opacity duration-500"></div>
 
-        <aside class="w-full md:w-80 shrink-0 bg-panel rounded-3xl border border-white/5 p-6 md:p-8 flex flex-col items-center relative shadow-2xl md:overflow-y-auto">
+    <div class="flex flex-col md:flex-row max-w-7xl w-full gap-6 h-auto md:h-[90vh] relative z-10">
+
+        <aside class="w-full md:w-80 shrink-0 bg-panel rounded-3xl border border-bordercol/10 p-6 md:p-8 flex flex-col items-center relative shadow-2xl md:overflow-y-auto transition-colors duration-500">
             
             <div class="relative mb-6">
-                <div class="w-28 h-28 md:w-32 md:h-32 rounded-3xl bg-slate-700 overflow-hidden shadow-xl border-2 border-white/5">
+                <div class="w-28 h-28 md:w-32 md:h-32 rounded-3xl bg-bordercol/10 overflow-hidden shadow-xl border-2 border-bordercol/10">
                     <img src="profile.jpg" alt="Profile" class="w-full h-full object-cover">
                 </div>
-                <div class="absolute -bottom-2 -right-2 w-5 h-5 bg-green-500 border-4 border-panel rounded-full z-10"></div>
+                <div class="absolute -bottom-2 -right-2 w-5 h-5 bg-green-500 border-4 border-panel rounded-full z-10 transition-colors duration-500"></div>
             </div>
 
-            <h1 class="text-2xl font-bold text-white tracking-wide mb-2 text-center">Nurul Jannah</h1>
-            <div class="bg-white/5 px-4 py-1 rounded-lg text-xs font-mono text-slate-400 mb-8 border border-white/5 text-center">
+            <h1 class="text-2xl font-bold text-tmain tracking-wide mb-2 text-center transition-colors duration-500">Nurul Jannah</h1>
+            <div class="bg-bordercol/5 px-4 py-1 rounded-lg text-xs font-mono text-tmuted mb-8 border border-bordercol/10 text-center transition-colors duration-500">
                 Software Engineer Graduate
             </div>
 
-            <div class="w-full h-px bg-white/5 mb-8"></div>
+            <div class="w-full h-px bg-bordercol/10 mb-8 transition-colors duration-500"></div>
 
             <div class="w-full space-y-4 mb-8">
-                <div class="flex items-center gap-3 group p-3 rounded-xl hover:bg-white/5 transition">
-                    <div class="w-8 h-8 rounded-lg bg-deep border border-white/5 flex items-center justify-center text-neon shrink-0">
+                <div class="flex items-center gap-3 group p-3 rounded-xl hover:bg-bordercol/5 transition">
+                    <div class="w-8 h-8 rounded-lg bg-deep border border-bordercol/10 flex items-center justify-center text-neon shrink-0 transition-colors duration-500">
                         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
                     </div>
                     <div class="overflow-hidden">
-                        <p class="text-[10px] text-slate-500 font-bold uppercase">Email</p>
-                        <p class="text-xs text-white truncate">nuruljannahkz03@gmail.com</p>
+                        <p class="text-[10px] text-tmuted font-bold uppercase transition-colors duration-500">Email</p>
+                        <p class="text-xs text-tmain truncate transition-colors duration-500">nuruljannahkz03@gmail.com</p>
                     </div>
                 </div>
 
-                <div class="flex items-center gap-3 group p-3 rounded-xl hover:bg-white/5 transition">
-                    <div class="w-8 h-8 rounded-lg bg-deep border border-white/5 flex items-center justify-center text-neon shrink-0">
+                <div class="flex items-center gap-3 group p-3 rounded-xl hover:bg-bordercol/5 transition">
+                    <div class="w-8 h-8 rounded-lg bg-deep border border-bordercol/10 flex items-center justify-center text-neon shrink-0 transition-colors duration-500">
                         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
                     </div>
                     <div>
-                        <p class="text-[10px] text-slate-500 font-bold uppercase">Phone</p>
-                        <p class="text-xs text-white">+60 17-517 5404</p>
+                        <p class="text-[10px] text-tmuted font-bold uppercase transition-colors duration-500">Phone</p>
+                        <p class="text-xs text-tmain transition-colors duration-500">+60 17-517 5404</p>
                     </div>
                 </div>
 
-                <div class="flex items-center gap-3 group p-3 rounded-xl hover:bg-white/5 transition">
-                    <div class="w-8 h-8 rounded-lg bg-deep border border-white/5 flex items-center justify-center text-neon shrink-0">
+                <div class="flex items-center gap-3 group p-3 rounded-xl hover:bg-bordercol/5 transition">
+                    <div class="w-8 h-8 rounded-lg bg-deep border border-bordercol/10 flex items-center justify-center text-neon shrink-0 transition-colors duration-500">
                         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
                     </div>
                     <div>
-                        <p class="text-[10px] text-slate-500 font-bold uppercase">Location</p>
-                        <p class="text-xs text-white">Perak, Malaysia</p>
+                        <p class="text-[10px] text-tmuted font-bold uppercase transition-colors duration-500">Location</p>
+                        <p class="text-xs text-tmain transition-colors duration-500">Perak, Malaysia</p>
                     </div>
                 </div>
             </div>
 
             <div class="mt-auto flex gap-4 justify-center w-full">
-                <a href="https://github.com/JannahKZ" target="_blank" class="text-slate-500 hover:text-neon transition transform hover:-translate-y-1">
+                <a href="https://github.com/JannahKZ" target="_blank" class="text-tmuted hover:text-neon transition transform hover:-translate-y-1">
                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
                 </a>
-                <a href="https://linkedin.com/in/nurul-jannah-kamarul-zaman" target="_blank" class="text-slate-500 hover:text-neon transition transform hover:-translate-y-1">
+                <a href="https://linkedin.com/in/nurul-jannah-kamarul-zaman" target="_blank" class="text-tmuted hover:text-neon transition transform hover:-translate-y-1">
                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
                 </a>
             </div>
         </aside>
 
-        <main class="flex-1 bg-panel rounded-3xl border border-white/5 relative md:overflow-y-auto overflow-x-hidden shadow-2xl flex flex-col">
+        <main class="flex-1 bg-panel rounded-3xl border border-bordercol/10 relative md:overflow-y-auto overflow-x-hidden shadow-2xl flex flex-col transition-colors duration-500">
             
-            <div class="flex flex-col md:flex-row justify-between items-center md:items-start w-full border-b border-white/5 md:border-none">
+            <div class="flex flex-col md:flex-row justify-between items-center md:items-start w-full border-b border-bordercol/10 md:border-none transition-colors duration-500">
                 
                 <div class="pt-6 md:pt-8 pl-0 md:pl-12 text-center md:text-left w-full md:w-auto">
-                    <h2 class="text-3xl md:text-4xl font-bold text-white relative inline-block">
+                    <h2 class="text-3xl md:text-4xl font-bold text-tmain relative inline-block transition-colors duration-500">
                         About Me
-                        <span class="absolute -bottom-2 left-1/4 right-1/4 md:left-0 md:right-auto md:w-12 h-1 bg-neon rounded-full"></span>
+                        <span class="absolute -bottom-2 left-1/4 right-1/4 md:left-0 md:right-auto md:w-12 h-1 bg-neon rounded-full transition-colors duration-500"></span>
                     </h2>
                 </div>
 
-                <nav class="bg-tab mt-6 md:mt-0 w-full md:w-auto md:border-l md:border-b border-white/5 px-4 md:px-6 py-4 flex justify-center md:justify-end gap-4 md:gap-6 text-sm font-medium md:rounded-bl-[1.5rem] shadow-xl flex-wrap">
-                    <a href="index.html" class="text-neon">About</a>
-                    <a href="resume.html" class="text-slate-400 hover:text-white transition">Resume</a>
-                    <a href="projects.html" class="text-slate-400 hover:text-white transition">Portfolio</a>
-                    <a href="contact.html" class="text-slate-400 hover:text-white transition">Contact</a>
+                <nav class="bg-tab mt-6 md:mt-0 w-full md:w-auto md:border-l md:border-b border-bordercol/10 px-4 md:px-6 py-4 flex justify-center items-center md:justify-end gap-4 md:gap-6 text-sm font-medium md:rounded-bl-[1.5rem] shadow-xl flex-wrap transition-colors duration-500">
+                    <a href="index.html" class="text-neon transition-colors duration-500">About</a>
+                    <a href="resume.html" class="text-tmuted hover:text-tmain transition-colors duration-500">Resume</a>
+                    <a href="projects.html" class="text-tmuted hover:text-tmain transition-colors duration-500">Portfolio</a>
+                    <a href="contact.html" class="text-tmuted hover:text-tmain transition-colors duration-500">Contact</a>
+                    
+                    <button onclick="toggleTheme()" class="ml-2 w-8 h-8 rounded-full bg-bordercol/10 flex items-center justify-center text-base hover:bg-neon hover:text-white transition-all duration-300" aria-label="Toggle Theme">
+                        <span id="theme-icon">🍁</span>
+                    </button>
                 </nav>
             </div>
 
-            <div class="p-6 md:p-12 h-full flex flex-col">
+            <div class="p-6 md:p-12 h-full flex flex-col z-10">
                 
-                <div class="text-slate-400 leading-relaxed text-sm md:text-base space-y-4 mb-10 mt-4">
+                <div class="text-tmuted leading-relaxed text-sm md:text-base space-y-4 mb-10 mt-4 transition-colors duration-500">
                     <p>
                         I am a Software Engineering graduate with hands-on experience in web application development and enterprise system enhancement. 
                         During my industrial training, I developed scalable applications by writing clean code, integrating RESTful APIs, and designing reliable relational databases.
@@ -121,48 +204,139 @@
                     </p>
                 </div>
 
-                <h3 class="text-2xl font-bold text-white mb-6">What I'm Doing</h3>
+                <h3 class="text-2xl font-bold text-tmain mb-6 transition-colors duration-500">What I'm Doing</h3>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="bg-deep/50 p-6 rounded-2xl border border-white/5 flex gap-4 hover:-translate-y-1 transition duration-300 shadow-lg">
+                    <div class="bg-deep/70 p-6 rounded-2xl border border-bordercol/10 flex gap-4 hover:-translate-y-1 transition duration-300 shadow-lg">
                         <div class="text-3xl">💻</div>
                         <div>
-                            <h4 class="text-white font-bold mb-1">Web Development</h4>
-                            <p class="text-sm text-slate-400">Building functional, responsive web applications using frameworks like Laravel and ASP.NET.</p>
+                            <h4 class="text-tmain font-bold mb-1 transition-colors duration-500">Web Development</h4>
+                            <p class="text-sm text-tmuted transition-colors duration-500">Building functional, responsive web applications using frameworks like Laravel and ASP.NET.</p>
                         </div>
                     </div>
 
-                    <div class="bg-deep/50 p-6 rounded-2xl border border-white/5 flex gap-4 hover:-translate-y-1 transition duration-300 shadow-lg">
+                    <div class="bg-deep/70 p-6 rounded-2xl border border-bordercol/10 flex gap-4 hover:-translate-y-1 transition duration-300 shadow-lg">
                         <div class="text-3xl">⚙️</div>
                         <div>
-                            <h4 class="text-white font-bold mb-1">Backend & Databases</h4>
-                            <p class="text-sm text-slate-400">Designing relational schemas and managing data effectively with PostgreSQL and MySQL.</p>
+                            <h4 class="text-tmain font-bold mb-1 transition-colors duration-500">Backend & Databases</h4>
+                            <p class="text-sm text-tmuted transition-colors duration-500">Designing relational schemas and managing data effectively with PostgreSQL and MySQL.</p>
                         </div>
                     </div>
 
-                    <div class="bg-deep/50 p-6 rounded-2xl border border-white/5 flex gap-4 hover:-translate-y-1 transition duration-300 shadow-lg">
+                    <div class="bg-deep/70 p-6 rounded-2xl border border-bordercol/10 flex gap-4 hover:-translate-y-1 transition duration-300 shadow-lg">
                         <div class="text-3xl">📱</div>
                         <div>
-                            <h4 class="text-white font-bold mb-1">Mobile Development</h4>
-                            <p class="text-sm text-slate-400">Creating intuitive, cross-platform mobile experiences utilizing Flutter and Dart.</p>
+                            <h4 class="text-tmain font-bold mb-1 transition-colors duration-500">Mobile Development</h4>
+                            <p class="text-sm text-tmuted transition-colors duration-500">Creating intuitive, cross-platform mobile experiences utilizing Flutter and Dart.</p>
                         </div>
                     </div>
 
-                    <div class="bg-deep/50 p-6 rounded-2xl border border-white/5 flex gap-4 hover:-translate-y-1 transition duration-300 shadow-lg">
+                    <div class="bg-deep/70 p-6 rounded-2xl border border-bordercol/10 flex gap-4 hover:-translate-y-1 transition duration-300 shadow-lg">
                         <div class="text-3xl">🎨</div>
                         <div>
-                            <h4 class="text-white font-bold mb-1">Frontend Design</h4>
-                            <p class="text-sm text-slate-400">Styling clean and user-friendly interfaces with modern tools like Tailwind CSS.</p>
+                            <h4 class="text-tmain font-bold mb-1 transition-colors duration-500">Frontend Design</h4>
+                            <p class="text-sm text-tmuted transition-colors duration-500">Styling clean and user-friendly interfaces with modern tools like Tailwind CSS.</p>
                         </div>
                     </div>
                 </div>
 
-                <footer class="mt-auto pt-10 pb-2 text-center md:text-right text-slate-600 text-sm">
-                    &copy; 2026 <span class="text-slate-300 font-bold">Nurul Jannah</span>. 
+                <footer class="mt-auto pt-10 pb-2 text-center md:text-right text-tmuted text-sm transition-colors duration-500">
+                    &copy; 2026 <span class="text-tmain font-bold transition-colors duration-500">Nurul Jannah</span>. 
                 </footer>
 
             </div> 
         </main> 
     </div> 
+
+    <script>
+        const body = document.body;
+        const starsLayer = document.getElementById('stars-layer');
+        const meteorContainer = document.getElementById('meteor-container');
+        const leafContainer = document.getElementById('leaf-container');
+        const themeIcon = document.getElementById('theme-icon');
+
+        // Check local storage on load (DEFAULTS TO LIGHT)
+        const savedTheme = localStorage.getItem('portfolioTheme');
+        
+        if(savedTheme === 'dark') {
+            enableDarkMode();
+        } else {
+            // If no saved theme, default to Light Theme
+            enableLightMode();
+        }
+
+        function toggleTheme() {
+            if (body.classList.contains('theme-light')) {
+                enableDarkMode();
+            } else {
+                enableLightMode();
+            }
+        }
+
+        function enableLightMode() {
+            body.classList.add('theme-light');
+            localStorage.setItem('portfolioTheme', 'light');
+            themeIcon.innerText = '🍁';
+            
+            starsLayer.classList.add('opacity-0');
+            meteorContainer.classList.add('hidden');
+            leafContainer.classList.remove('hidden');
+            
+            if(leafContainer.children.length === 0) createLeaves();
+        }
+
+        function enableDarkMode() {
+            body.classList.remove('theme-light');
+            localStorage.setItem('portfolioTheme', 'dark');
+            themeIcon.innerText = '🌙';
+            
+            starsLayer.classList.remove('opacity-0');
+            meteorContainer.classList.remove('hidden');
+            leafContainer.classList.add('hidden');
+
+            if(meteorContainer.children.length === 0) createMeteors();
+        }
+
+        // Generate Meteors
+        function createMeteors() {
+            const screenWidth = window.innerWidth;
+            const meteorCount = screenWidth < 768 ? 10 : 25; 
+
+            for(let i = 0; i < meteorCount; i++) {
+                let meteor = document.createElement('div');
+                meteor.className = 'meteor animate-meteor';
+                
+                meteor.style.top = (Math.random() * 100 - 20) + 'vh'; 
+                meteor.style.left = (Math.random() * 100 + 30) + 'vw'; 
+                
+                meteor.style.animationDuration = (Math.random() * 2 + 1.5) + 's';
+                meteor.style.animationDelay = (Math.random() * 6) + 's';
+                
+                meteorContainer.appendChild(meteor);
+            }
+        }
+
+        // Generate Leaves
+        function createLeaves() {
+            const leaves = ['🍂', '🍁', '🍃'];
+            const screenWidth = window.innerWidth;
+            const leafCount = screenWidth < 768 ? 15 : 30; 
+
+            for(let i = 0; i < leafCount; i++) {
+                let leaf = document.createElement('div');
+                leaf.innerText = leaves[Math.floor(Math.random() * leaves.length)];
+                leaf.className = 'absolute opacity-70 animate-fall';
+                
+                const size = Math.random() * 1.5 + 1; 
+                leaf.style.fontSize = size + 'rem';
+                leaf.style.left = Math.random() * 100 + 'vw';
+                leaf.style.top = '-10vh';
+                leaf.style.animationDuration = (Math.random() * 5 + 5) + 's'; 
+                leaf.style.animationDelay = (Math.random() * 5) + 's'; 
+                
+                leafContainer.appendChild(leaf);
+            }
+        }
+    </script>
 </body>
 </html>
