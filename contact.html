@@ -213,7 +213,9 @@
                     </div>
 
                     <div class="bg-deep/70 p-6 md:p-8 rounded-2xl border border-bordercol/10 shadow-lg transition-colors duration-500">
-                        <form action="contact.php" method="POST" class="space-y-6">
+                        <form id="contactForm" action="https://api.web3forms.com/submit" method="POST" class="space-y-6">
+
+                            <input type="hidden" name="access_key" value="f1f4f539-055e-452f-aa46-2a714a4fd371">
                             
                             <div class="space-y-2">
                                 <label for="name" class="text-xs font-bold text-tmuted uppercase tracking-wider transition-colors duration-500">Your Name</label>
@@ -236,10 +238,9 @@
                                     placeholder="Tell me about your project..."></textarea>
                             </div>
 
-                            <button type="submit" class="w-full bg-neon text-white font-bold py-4 rounded-lg shadow-[0_0_20px_rgba(var(--color-neon),0.3)] hover:opacity-80 hover:-translate-y-1 transition duration-300">
+                            <button type="submit" id="submitBtn" class="w-full bg-neon text-white font-bold py-4 rounded-lg shadow-[0_0_20px_rgba(var(--color-neon),0.3)] hover:opacity-80 hover:-translate-y-1 transition duration-300">
                                 Send Message
                             </button>
-
                         </form>
                     </div>
 
@@ -253,7 +254,25 @@
         </main> 
     </div> 
 
+    <div id="successPopup" class="fixed inset-0 z-[110] hidden items-center justify-center p-4 sm:p-6 transition-all duration-300" style="background-color: rgba(0, 0, 0, 0.7); backdrop-filter: blur(4px);">
+        <div id="popupContent" class="bg-panel rounded-3xl border border-bordercol/10 shadow-2xl p-8 flex flex-col items-center max-w-sm w-full transform scale-95 opacity-0 transition-all duration-300 text-center">
+            <div class="text-6xl mb-4 animate-bounce">✅</div>
+            <h3 class="text-2xl font-bold text-tmain mb-2">Message Sent!</h3>
+            <p class="text-tmuted mb-6">Thank you for reaching out. I will get back to you as soon as possible.</p>
+            <button onclick="closeSuccessPopup()" class="w-full bg-neon text-white font-bold py-3 px-6 rounded-lg hover:opacity-80 transition shadow-neon-sm">
+                Awesome!
+            </button>
+        </div>
+    </div>
+
+    <button id="scrollTopBtn" onclick="scrollToTop()" class="fixed bottom-6 right-6 w-12 h-12 bg-deep border border-bordercol/20 rounded-full flex items-center justify-center text-neon shadow-neon-sm opacity-0 pointer-events-none transition-all duration-300 z-50 hover:-translate-y-1 hover:bg-bordercol/10">
+        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
+        </svg>
+    </button>
+    
     <script>
+        // --- THEME & EFFECTS ---
         const body = document.body;
         const starsLayer = document.getElementById('stars-layer');
         const meteorContainer = document.getElementById('meteor-container');
@@ -280,11 +299,9 @@
             body.classList.add('theme-light');
             localStorage.setItem('portfolioTheme', 'light');
             themeIcon.innerText = '🍁';
-            
             starsLayer.classList.add('opacity-0');
             meteorContainer.classList.add('hidden');
             leafContainer.classList.remove('hidden');
-            
             if(leafContainer.children.length === 0) createLeaves();
         }
 
@@ -292,18 +309,15 @@
             body.classList.remove('theme-light');
             localStorage.setItem('portfolioTheme', 'dark');
             themeIcon.innerText = '🌙';
-            
             starsLayer.classList.remove('opacity-0');
             meteorContainer.classList.remove('hidden');
             leafContainer.classList.add('hidden');
-
             if(meteorContainer.children.length === 0) createMeteors();
         }
 
         function createMeteors() {
             const screenWidth = window.innerWidth;
             const meteorCount = screenWidth < 768 ? 10 : 25; 
-
             for(let i = 0; i < meteorCount; i++) {
                 let meteor = document.createElement('div');
                 meteor.className = 'meteor animate-meteor';
@@ -319,7 +333,6 @@
             const leaves = ['🍂', '🍁', '🍃'];
             const screenWidth = window.innerWidth;
             const leafCount = screenWidth < 768 ? 15 : 30; 
-
             for(let i = 0; i < leafCount; i++) {
                 let leaf = document.createElement('div');
                 leaf.innerText = leaves[Math.floor(Math.random() * leaves.length)];
@@ -332,6 +345,88 @@
                 leaf.style.animationDelay = (Math.random() * 5) + 's'; 
                 leafContainer.appendChild(leaf);
             }
+        }
+
+        // --- SCROLL TO TOP LOGIC ---
+        const scrollTopBtn = document.getElementById('scrollTopBtn');
+        const mainScrollContainer = document.querySelector('main');
+
+        function checkScroll() {
+            const scrollPos = window.scrollY || mainScrollContainer.scrollTop;
+            if (scrollPos > 200) {
+                scrollTopBtn.classList.remove('opacity-0', 'pointer-events-none');
+            } else {
+                scrollTopBtn.classList.add('opacity-0', 'pointer-events-none');
+            }
+        }
+        window.addEventListener('scroll', checkScroll);
+        mainScrollContainer.addEventListener('scroll', checkScroll);
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            mainScrollContainer.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // --- AJAX FORM SUBMISSION & SUCCESS POPUP ---
+        const form = document.getElementById('contactForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const successPopup = document.getElementById('successPopup');
+        const popupContent = document.getElementById('popupContent');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault(); // Stop standard redirect behavior
+            
+            // Show loading state
+            submitBtn.innerText = 'Sending...';
+            submitBtn.disabled = true;
+            submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
+
+            const formData = new FormData(form);
+
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    form.reset(); // Clear the inputs
+                    showSuccessPopup(); // Show the cool checkmark modal
+                } else {
+                    alert('Something went wrong. Please try again.');
+                }
+            })
+            .catch(error => {
+                alert('Something went wrong. Please check your connection.');
+            })
+            .finally(() => {
+                // Restore button state
+                submitBtn.innerText = 'Send Message';
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            });
+        });
+
+        function showSuccessPopup() {
+            successPopup.classList.remove('hidden');
+            successPopup.classList.add('flex');
+            // Small delay to allow the display:flex to apply before animating scale/opacity
+            setTimeout(() => {
+                popupContent.classList.remove('scale-95', 'opacity-0');
+                popupContent.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+
+        function closeSuccessPopup() {
+            popupContent.classList.remove('scale-100', 'opacity-100');
+            popupContent.classList.add('scale-95', 'opacity-0');
+            // Wait for scale down animation before hiding completely
+            setTimeout(() => {
+                successPopup.classList.add('hidden');
+                successPopup.classList.remove('flex');
+            }, 300);
         }
     </script>
 </body>

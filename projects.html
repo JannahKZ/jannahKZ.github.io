@@ -292,7 +292,7 @@
                             Automated invoicing platform designed for speed. Handles recurring billing and PDF generation.
                         </p>
                         <div class="flex flex-wrap gap-2 mt-auto relative z-10">
-                            <span class="text-xs font-mono text-neon bg-bordercol/5 px-3 py-1 rounded-full border border-bordercol/10 transition-colors duration-500">System Design</span>
+                            <span class="text-xs font-mono text-neon bg-bordercol/5 px-3 py-1 rounded-full border border-bordercol/10 transition-colors duration-500">React</span>
                             <span class="text-xs font-mono text-neon bg-bordercol/5 px-3 py-1 rounded-full border border-bordercol/10 transition-colors duration-500">Automation</span>
                         </div>
                     </div>
@@ -320,6 +320,12 @@
             </div>
         </div>
     </div>
+
+    <button id="scrollTopBtn" onclick="scrollToTop()" class="fixed bottom-6 right-6 w-12 h-12 bg-deep border border-bordercol/20 rounded-full flex items-center justify-center text-neon shadow-neon-sm opacity-0 pointer-events-none transition-all duration-300 z-50 hover:-translate-y-1 hover:bg-bordercol/10">
+        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
+        </svg>
+    </button>
 
     <script>
         const projectData = {
@@ -545,6 +551,30 @@
                 leaf.style.animationDelay = (Math.random() * 5) + 's'; 
                 leafContainer.appendChild(leaf);
             }
+        }
+
+        // --- SCROLL TO TOP LOGIC ---
+        const scrollTopBtn = document.getElementById('scrollTopBtn');
+        const mainScrollContainer = document.querySelector('main');
+
+        function checkScroll() {
+            // Check both window scroll (mobile) and main container scroll (desktop)
+            const scrollPos = window.scrollY || mainScrollContainer.scrollTop;
+            if (scrollPos > 200) {
+                scrollTopBtn.classList.remove('opacity-0', 'pointer-events-none');
+            } else {
+                scrollTopBtn.classList.add('opacity-0', 'pointer-events-none');
+            }
+        }
+
+        // Listen to both environments
+        window.addEventListener('scroll', checkScroll);
+        mainScrollContainer.addEventListener('scroll', checkScroll);
+
+        function scrollToTop() {
+            // Smoothly scroll both possible containers
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            mainScrollContainer.scrollTo({ top: 0, behavior: 'smooth' });
         }
     </script>
 </body>

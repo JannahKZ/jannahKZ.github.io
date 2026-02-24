@@ -247,7 +247,10 @@
                                 <span class="absolute -left-[9px] top-1.5 w-4 h-4 bg-deep border-2 border-tmuted rounded-full transition-colors duration-500"></span>
                                 <h4 class="text-xl font-bold text-tmain mb-1 transition-colors duration-500">Foundation of Physical Science</h4>
                                 <p class="text-tmuted text-sm mb-2 transition-colors duration-500">Penang Matriculation College</p>
-                                <p class="text-sm text-tmuted leading-relaxed transition-colors duration-500"><span class="text-tmain font-medium">CGPA:</span> 3.82 | <span class="text-tmain font-medium">MUET:</span> Band 4</p>
+                                <span class="inline-block bg-bordercol/10 text-tmuted text-xs font-mono px-2 py-1 rounded border border-bordercol/20 mb-3 transition-colors duration-500">
+                                    May 2021 - May 2022
+                                </span>
+                                <p class="text-sm text-tmuted leading-relaxed transition-colors duration-500"><span class="text-tmain font-medium">CGPA:</span> 3.71 | <span class="text-tmain font-medium">MUET:</span> Band 4</p>
                             </div>
 
                             <div class="relative pl-8">
@@ -281,7 +284,7 @@
                                     May 2021 - May 2022
                                 </span>
                                 <p class="text-sm text-tmuted leading-relaxed mb-2 transition-colors duration-500">• Managed digital documentation and coordinated organizational activities involving cross-functional teams.</p>
-                                <p class="text-sm text-tmuted leading-relaxed transition-colors duration-500"><span class="text-tmain font-medium">Programmes:</span> Semarak Kembara Merdeka 66, TikTok! TikTok! Semarak Belia! - Belia & Media Sosial, Kunjung Hormat Ke Yayasan Perak, etc.</p>
+                                <p class="text-sm text-tmuted leading-relaxed transition-colors duration-500"><span class="text-tmain font-medium">Programmes:</span> Simposium Kepimpinan Mahasiswa Perak 2024, TikTok! TikTok! Semarak Belia! - Belia & Media Sosial, Kunjung Hormat Ke Yayasan Perak, etc.</p>
                             </div>
 
                             <div class="relative pl-8">
@@ -289,7 +292,7 @@
                                 <h4 class="text-xl font-bold text-tmain mb-1 transition-colors duration-500">Active Volunteer</h4>
                                 <p class="text-sm text-tmuted leading-relaxed mb-2 transition-colors duration-500">• Collaborated with diverse teams and organize successful events, showcasing effective teamwork skills.</p>
                                 <p class="text-sm text-tmuted leading-relaxed mb-2 transition-colors duration-500">• Coordinated and participated in various community projects, displaying a proactive and solutions-oriented approach to achieve shared goals.</p>
-                                <p class="text-sm text-tmuted leading-relaxed transition-colors duration-500"><span class="text-tmain font-medium">Programmes:</span> Misi Pasca Banjir Terengganu, Malaysia University Volunteer Convention 2024</p>
+                                <p class="text-sm text-tmuted leading-relaxed transition-colors duration-500"><span class="text-tmain font-medium">Programmes:</span> Misi Pasca Banjir Terengganu, Malaysia University Volunteer Convention 2024, Semarak Kembara Merdeka 66, etc.</p>
                             </div>
                         </div>
                     </section>
@@ -309,6 +312,12 @@
             </div> 
         </main> 
     </div> 
+
+    <button id="scrollTopBtn" onclick="scrollToTop()" class="fixed bottom-6 right-6 w-12 h-12 bg-deep border border-bordercol/20 rounded-full flex items-center justify-center text-neon shadow-neon-sm opacity-0 pointer-events-none transition-all duration-300 z-50 hover:-translate-y-1 hover:bg-bordercol/10">
+        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
+        </svg>
+    </button>
 
     <script>
         const body = document.body;
@@ -389,6 +398,30 @@
                 leaf.style.animationDelay = (Math.random() * 5) + 's'; 
                 leafContainer.appendChild(leaf);
             }
+        }
+
+        // --- SCROLL TO TOP LOGIC ---
+        const scrollTopBtn = document.getElementById('scrollTopBtn');
+        const mainScrollContainer = document.querySelector('main');
+
+        function checkScroll() {
+            // Check both window scroll (mobile) and main container scroll (desktop)
+            const scrollPos = window.scrollY || mainScrollContainer.scrollTop;
+            if (scrollPos > 200) {
+                scrollTopBtn.classList.remove('opacity-0', 'pointer-events-none');
+            } else {
+                scrollTopBtn.classList.add('opacity-0', 'pointer-events-none');
+            }
+        }
+
+        // Listen to both environments
+        window.addEventListener('scroll', checkScroll);
+        mainScrollContainer.addEventListener('scroll', checkScroll);
+
+        function scrollToTop() {
+            // Smoothly scroll both possible containers
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            mainScrollContainer.scrollTo({ top: 0, behavior: 'smooth' });
         }
     </script>
 </body>
