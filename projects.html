@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nurul Jannah</title>
+    <title>Nurul Jannah - Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -24,27 +23,30 @@
         }
     </script>
     <style>
-        html, body { height: 100%; }
+        /* Mobile-responsive scrolling */
         ::-webkit-scrollbar { width: 0px; background: transparent; }
         .file-tab { border-bottom-left-radius: 1.5rem; }
+        /* Smooth fade in for modal */
+        .modal-active { display: flex !important; animation: fadeIn 0.3s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
-<body class="bg-deep text-slate-300 font-sans antialiased h-full p-4 md:p-8 flex items-center justify-center">
+<body class="bg-deep text-slate-300 font-sans antialiased min-h-screen py-8 px-4 md:p-8 flex items-center justify-center relative">
 
-    <div class="flex flex-col md:flex-row max-w-7xl w-full gap-6 h-[90vh]">
+    <div class="flex flex-col md:flex-row max-w-7xl w-full gap-6 h-auto md:h-[90vh]">
 
-        <aside class="w-full md:w-80 shrink-0 bg-panel rounded-3xl border border-white/5 p-8 flex flex-col items-center relative shadow-2xl overflow-y-auto">
-            
+        <aside class="w-full md:w-80 shrink-0 bg-panel rounded-3xl border border-white/5 p-6 md:p-8 flex flex-col items-center relative shadow-2xl md:overflow-y-auto">
             <div class="relative mb-6">
-                <div class="w-32 h-32 rounded-3xl bg-slate-700 overflow-hidden shadow-xl border-2 border-white/5">
+                <div class="w-28 h-28 md:w-32 md:h-32 rounded-3xl bg-slate-700 overflow-hidden shadow-xl border-2 border-white/5">
                     <img src="profile.jpg" alt="Profile" class="w-full h-full object-cover">
                 </div>
                 <div class="absolute -bottom-2 -right-2 w-5 h-5 bg-green-500 border-4 border-panel rounded-full z-10"></div>
             </div>
 
             <h1 class="text-2xl font-bold text-white tracking-wide mb-2 text-center">Nurul Jannah</h1>
-            <div class="bg-white/5 px-4 py-1 rounded-lg text-xs font-mono text-slate-400 mb-8 border border-white/5">
-                Software Engineer Graduate            </div>
+            <div class="bg-white/5 px-4 py-1 rounded-lg text-xs font-mono text-slate-400 mb-8 border border-white/5 text-center">
+                Software Engineer Graduate
+            </div>
 
             <div class="w-full h-px bg-white/5 mb-8"></div>
 
@@ -58,7 +60,6 @@
                         <p class="text-xs text-white truncate">nuruljannahkz03@gmail.com</p>
                     </div>
                 </div>
-
                 <div class="flex items-center gap-3 group p-3 rounded-xl hover:bg-white/5 transition">
                     <div class="w-8 h-8 rounded-lg bg-deep border border-white/5 flex items-center justify-center text-neon shrink-0">
                         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
@@ -68,7 +69,6 @@
                         <p class="text-xs text-white">+60 17-517 5404</p>
                     </div>
                 </div>
-
                 <div class="flex items-center gap-3 group p-3 rounded-xl hover:bg-white/5 transition">
                     <div class="w-8 h-8 rounded-lg bg-deep border border-white/5 flex items-center justify-center text-neon shrink-0">
                         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
@@ -81,143 +81,325 @@
             </div>
 
             <div class="mt-auto flex gap-4 justify-center w-full">
-                                <a href="https://github.com/JannahKZ" target="_blank" class="text-slate-500 hover:text-neon transition transform hover:-translate-y-1">
-                                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                                    </a>
-                                <a href="https://linkedin.com/in/nurul-jannah-kamarul-zaman" target="_blank" class="text-slate-500 hover:text-neon transition transform hover:-translate-y-1">
-                                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                                    </a>
-                                <a href="https://www.instagram.com/j4nnah._?igsh=MWtiamw1b2cwdjVncw==" target="_blank" class="text-slate-500 hover:text-neon transition transform hover:-translate-y-1">
-                                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                                    </a>
-                            </div>
+                <a href="https://github.com/JannahKZ" target="_blank" class="text-slate-500 hover:text-neon transition transform hover:-translate-y-1">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                </a>
+                <a href="https://linkedin.com/in/nurul-jannah-kamarul-zaman" target="_blank" class="text-slate-500 hover:text-neon transition transform hover:-translate-y-1">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                </a>
+            </div>
         </aside>
 
-        <main class="flex-1 bg-panel rounded-3xl border border-white/5 relative overflow-y-auto overflow-x-hidden shadow-2xl flex flex-col">
+        <main class="flex-1 bg-panel rounded-3xl border border-white/5 relative md:overflow-y-auto overflow-x-hidden shadow-2xl flex flex-col">
             
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-start w-full">
-                
-                <div class="pt-8 pl-8 md:pt-8 md:pl-12">
+            <div class="flex flex-col md:flex-row justify-between items-center md:items-start w-full border-b border-white/5 md:border-none">
+                <div class="pt-6 md:pt-8 pl-0 md:pl-12 text-center md:text-left w-full md:w-auto">
                     <h2 class="text-3xl md:text-4xl font-bold text-white relative inline-block">
-                        Portfolio                        <span class="absolute -bottom-2 left-0 w-12 h-1 bg-neon rounded-full"></span>
+                        Portfolio
+                        <span class="absolute -bottom-2 left-1/4 right-1/4 md:left-0 md:right-auto md:w-12 h-1 bg-neon rounded-full"></span>
                     </h2>
                 </div>
-
-                <nav class="bg-tab border-l border-b border-white/5 px-6 py-4 flex gap-6 text-sm font-medium file-tab shadow-xl self-end md:self-auto">
-                                        <a href="index.html" class="text-slate-400 hover:text-white transition">About</a>
+                <nav class="bg-tab mt-6 md:mt-0 w-full md:w-auto md:border-l md:border-b border-white/5 px-4 md:px-6 py-4 flex justify-center md:justify-end gap-4 md:gap-6 text-sm font-medium md:rounded-bl-[1.5rem] shadow-xl flex-wrap">
+                    <a href="index.html" class="text-slate-400 hover:text-white transition">About</a>
                     <a href="resume.html" class="text-slate-400 hover:text-white transition">Resume</a>
                     <a href="projects.html" class="text-neon">Portfolio</a>
                     <a href="contact.html" class="text-slate-400 hover:text-white transition">Contact</a>
                 </nav>
             </div>
 
-            <div class="p-8 md:p-12 h-full flex flex-col">
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
-    
-            <div class="bg-deep p-6 rounded-2xl border border-white/5 hover:border-neon/50 transition duration-300 group shadow-lg flex flex-col h-full relative overflow-hidden">
-            
-            <div class="absolute inset-0 bg-neon/5 opacity-0 group-hover:opacity-100 transition duration-500"></div>
-
-            <div class="flex justify-between items-start mb-6 relative z-10">
-                <div class="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center text-neon group-hover:scale-110 transition duration-300">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
-                    </svg>
-                </div>
-                
-                <div class="text-slate-600 group-hover:text-neon transition">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>
-                </div>
-            </div>
-
-            <h3 class="text-xl font-bold text-white mb-3 group-hover:text-neon transition relative z-10">
-                HRMS Kanban Board            </h3>
-            
-            <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-1 relative z-10">
-                A real-time project management tool for HR departments. Features drag-and-drop tasks and live comments using SignalR.            </p>
-
-            <div class="flex flex-wrap gap-2 mt-auto relative z-10">
-                                    <span class="text-xs font-mono text-neon bg-neon/10 px-3 py-1 rounded-full border border-neon/20">
-                        PHP                    </span>
-                                    <span class="text-xs font-mono text-neon bg-neon/10 px-3 py-1 rounded-full border border-neon/20">
-                        SQL                    </span>
-                                    <span class="text-xs font-mono text-neon bg-neon/10 px-3 py-1 rounded-full border border-neon/20">
-                        Live Updates                    </span>
+            <div class="p-6 md:p-12 h-full flex flex-col">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+                    
+                    <div onclick="openModal('surprisebae')" class="cursor-pointer bg-deep p-6 rounded-2xl border border-white/5 hover:border-neon/50 transition duration-300 group shadow-lg flex flex-col h-full relative overflow-hidden">
+                        <div class="absolute inset-0 bg-neon/5 opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                        <div class="flex justify-between items-center mb-6 relative z-10">
+                            <div class="flex items-center gap-3">
+                                <div class="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center text-neon group-hover:scale-110 transition duration-300">
+                                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
+                                    </svg>
+                                </div>
+                                <span class="px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider rounded border border-green-500/50 bg-green-500/10 text-green-400">
+                                    Completed
+                                </span>
                             </div>
-
-        </div>
-            <div class="bg-deep p-6 rounded-2xl border border-white/5 hover:border-neon/50 transition duration-300 group shadow-lg flex flex-col h-full relative overflow-hidden">
-            
-            <div class="absolute inset-0 bg-neon/5 opacity-0 group-hover:opacity-100 transition duration-500"></div>
-
-            <div class="flex justify-between items-start mb-6 relative z-10">
-                <div class="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center text-neon group-hover:scale-110 transition duration-300">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
-                    </svg>
-                </div>
-                
-                <div class="text-slate-600 group-hover:text-neon transition">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>
-                </div>
-            </div>
-
-            <h3 class="text-xl font-bold text-white mb-3 group-hover:text-neon transition relative z-10">
-                QuickBill System            </h3>
-            
-            <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-1 relative z-10">
-                Automated invoicing platform designed for speed. Handles recurring billing and PDF generation.            </p>
-
-            <div class="flex flex-wrap gap-2 mt-auto relative z-10">
-                                    <span class="text-xs font-mono text-neon bg-neon/10 px-3 py-1 rounded-full border border-neon/20">
-                        System Design                    </span>
-                                    <span class="text-xs font-mono text-neon bg-neon/10 px-3 py-1 rounded-full border border-neon/20">
-                        Automation                    </span>
+                            <div class="text-slate-600 group-hover:text-neon transition flex items-center gap-1 text-xs font-bold uppercase tracking-widest">
+                                <span class="hidden sm:inline">View Details</span>
+                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>
                             </div>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3 group-hover:text-neon transition relative z-10">
+                            Surprise Bae Florist System
+                        </h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-1 relative z-10">
+                            A comprehensive web and mobile platform for customizing and booking floral arrangements, featuring a Laravel admin dashboard and a Flutter app.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mt-auto relative z-10">
+                            <span class="text-xs font-mono text-neon bg-neon/10 px-3 py-1 rounded-full border border-neon/20">Laravel</span>
+                            <span class="text-xs font-mono text-neon bg-neon/10 px-3 py-1 rounded-full border border-neon/20">Flutter</span>
+                            <span class="text-xs font-mono text-neon bg-neon/10 px-3 py-1 rounded-full border border-neon/20">MySQL</span>
+                        </div>
+                    </div>
 
-        </div>
-            <div class="bg-deep p-6 rounded-2xl border border-white/5 hover:border-neon/50 transition duration-300 group shadow-lg flex flex-col h-full relative overflow-hidden">
-            
-            <div class="absolute inset-0 bg-neon/5 opacity-0 group-hover:opacity-100 transition duration-500"></div>
-
-            <div class="flex justify-between items-start mb-6 relative z-10">
-                <div class="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center text-neon group-hover:scale-110 transition duration-300">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
-                    </svg>
-                </div>
-                
-                <div class="text-slate-600 group-hover:text-neon transition">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>
-                </div>
-            </div>
-
-            <h3 class="text-xl font-bold text-white mb-3 group-hover:text-neon transition relative z-10">
-                Secure Migration Log            </h3>
-            
-            <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-1 relative z-10">
-                Enterprise tool for tracking BitLocker encryption status across 500+ devices during department migrations.            </p>
-
-            <div class="flex flex-wrap gap-2 mt-auto relative z-10">
-                                    <span class="text-xs font-mono text-neon bg-neon/10 px-3 py-1 rounded-full border border-neon/20">
-                        Security                    </span>
-                                    <span class="text-xs font-mono text-neon bg-neon/10 px-3 py-1 rounded-full border border-neon/20">
-                        BitLocker                    </span>
+                    <div onclick="openModal('hrms')" class="cursor-pointer bg-deep p-6 rounded-2xl border border-white/5 hover:border-neon/50 transition duration-300 group shadow-lg flex flex-col h-full relative overflow-hidden">
+                        <div class="absolute inset-0 bg-neon/5 opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                        <div class="flex justify-between items-center mb-6 relative z-10">
+                            <div class="flex items-center gap-3">
+                                <div class="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center text-neon group-hover:scale-110 transition duration-300">
+                                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
+                                    </svg>
+                                </div>
+                                <span class="px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider rounded border border-green-500/50 bg-green-500/10 text-green-400">
+                                    Completed
+                                </span>
                             </div>
+                            <div class="text-slate-600 group-hover:text-neon transition flex items-center gap-1 text-xs font-bold uppercase tracking-widest">
+                                <span class="hidden sm:inline">View Details</span>
+                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3 group-hover:text-neon transition relative z-10">
+                            Max System HRMS
+                        </h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-1 relative z-10">
+                            A real-time project management tool for HR departments. Features drag-and-drop tasks and live comments using SignalR.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mt-auto relative z-10">
+                            <span class="text-xs font-mono text-neon bg-neon/10 px-3 py-1 rounded-full border border-neon/20">ASP.NET</span>
+                            <span class="text-xs font-mono text-neon bg-neon/10 px-3 py-1 rounded-full border border-neon/20">PostgreSQL</span>
+                            <span class="text-xs font-mono text-neon bg-neon/10 px-3 py-1 rounded-full border border-neon/20">JavaScript</span>
+                        </div>
+                    </div>
 
-        </div>
-    
-</div>
+                    <div onclick="openModal('edr')" class="cursor-pointer bg-deep p-6 rounded-2xl border border-white/5 hover:border-neon/50 transition duration-300 group shadow-lg flex flex-col h-full relative overflow-hidden">
+                        <div class="absolute inset-0 bg-neon/5 opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                        <div class="flex justify-between items-center mb-6 relative z-10">
+                            <div class="flex items-center gap-3">
+                                <div class="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center text-neon group-hover:scale-110 transition duration-300">
+                                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
+                                    </svg>
+                                </div>
+                                <span class="px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider rounded border border-green-500/50 bg-green-500/10 text-green-400">
+                                    Completed
+                                </span>
+                            </div>
+                            <div class="text-slate-600 group-hover:text-neon transition flex items-center gap-1 text-xs font-bold uppercase tracking-widest">
+                                <span class="hidden sm:inline">View Details</span>
+                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3 group-hover:text-neon transition relative z-10">
+                            Endpoint Detection & Response (EDR)
+                        </h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-1 relative z-10">
+                            Enterprise tool for tracking BitLocker encryption status across 500+ devices during department migrations.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mt-auto relative z-10">
+                            <span class="text-xs font-mono text-neon bg-neon/10 px-3 py-1 rounded-full border border-neon/20">Microsoft Entra ID</span>
+                            <span class="text-xs font-mono text-neon bg-neon/10 px-3 py-1 rounded-full border border-neon/20">BitLocker</span>
+                        </div>
+                    </div>
 
-<footer class="mt-auto pt-10 text-right text-slate-600 text-sm">
+                    <div onclick="openModal('quickbill')" class="cursor-pointer bg-deep p-6 rounded-2xl border border-white/5 hover:border-neon/50 transition duration-300 group shadow-lg flex flex-col h-full relative overflow-hidden">
+                        <div class="absolute inset-0 bg-neon/5 opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                        <div class="flex justify-between items-center mb-6 relative z-10">
+                            <div class="flex items-center gap-3">
+                                <div class="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center text-neon group-hover:scale-110 transition duration-300">
+                                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
+                                    </svg>
+                                </div>
+                                <span class="px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider rounded border border-orange-500/50 bg-orange-500/10 text-orange-400">
+                                    Ongoing
+                                </span>
+                            </div>
+                            <div class="text-slate-600 group-hover:text-neon transition flex items-center gap-1 text-xs font-bold uppercase tracking-widest">
+                                <span class="hidden sm:inline">View Details</span>
+                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3 group-hover:text-neon transition relative z-10">
+                            QuickBill System
+                        </h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-1 relative z-10">
+                            Automated invoicing platform designed for speed. Handles recurring billing and PDF generation.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mt-auto relative z-10">
+                            <span class="text-xs font-mono text-neon bg-neon/10 px-3 py-1 rounded-full border border-neon/20">System Design</span>
+                            <span class="text-xs font-mono text-neon bg-neon/10 px-3 py-1 rounded-full border border-neon/20">Automation</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <footer class="mt-auto pt-10 pb-2 text-center md:text-right text-slate-600 text-sm">
                     &copy; 2026 <span class="text-slate-300 font-bold">Nurul Jannah</span>. 
                 </footer>
+            </div> 
+        </main> 
+    </div>
 
-            </div> </main> </div> </body>
+    <div id="projectModal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 sm:p-6" style="background-color: rgba(0, 5, 24, 0.85); backdrop-filter: blur(8px);">
+        <div class="bg-panel w-full max-w-4xl max-h-[90vh] rounded-3xl border border-white/10 shadow-2xl overflow-y-auto relative flex flex-col">
+            
+            <button onclick="closeModal()" class="absolute top-4 right-4 md:top-6 md:right-6 w-10 h-10 bg-deep rounded-full flex items-center justify-center text-slate-400 hover:text-neon hover:bg-white/5 transition z-50 border border-white/5">
+                <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+            </button>
+
+            <div id="modalHeader" class="p-6 md:p-12 pb-6 border-b border-white/5 bg-gradient-to-b from-deep to-panel">
+            </div>
+
+            <div id="modalBody" class="p-6 md:p-12 pt-6 text-slate-300 space-y-8">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const projectData = {
+            surprisebae: {
+                title: "Surprise Bae Florist Online System",
+                role: "Full-Stack Developer",
+                tech: ["Laravel", "Flutter", "PHP", "MySQL", "JavaScript"],
+                overview: "A comprehensive web and mobile platform that simplifies the process of buying and customizing flowers and gifts, featuring an admin dashboard for operations and a user-friendly mobile app for customers.",
+                tasks: [
+                    "<strong>Full-Stack Architecture:</strong> Engineered a dual-platform solution featuring a Laravel-based backend for administrators and a Flutter mobile application for customers, connected via secure RESTful APIs.",
+                    "<strong>Dynamic Order Customization:</strong> Developed a highly customizable ordering module allowing users to build floral arrangements from scratch, select add-ons, and schedule flexible deliveries.",
+                    "<strong>Database Design:</strong> Designed and implemented a normalized MySQL database schema to efficiently manage customer data, dynamic product inventory, and transaction records.",
+                    "<strong>Secure Transactions:</strong> Integrated secure payment gateways (Stripe) and implemented token-based authentication to protect user data and financial transactions.",
+                    "<strong>Performance & Reporting:</strong> Built real-time stock management and reporting modules for administrators to dynamically oversee products, services, and sales analytics."
+                ],
+                images: [
+                    { src: "path/to/fig8_login.jpg", caption: "Figure 8: Customer Login Interface" },
+                    { src: "path/to/fig10_product.jpg", caption: "Figure 10: App Product Selection" },
+                    { src: "path/to/fig12_delivery.jpg", caption: "Figure 12: Delivery Tracking Interface" },
+                    { src: "path/to/fig26_order.jpg", caption: "Figure 26: Order Customization View" }
+                ]
+            },
+            hrms: {
+                title: "Max System HRMS",
+                role: "Junior Software Developer",
+                tech: ["ASP.NET Core", "PostgreSQL", "C#", "JavaScript", "Bootstrap"],
+                overview: "A cloud-hosted enterprise web application designed to replace fragmented legacy workflows with a centralized digital solution for employee data, attendance, leave, and recruitment management.",
+                tasks: [
+                    "<strong>Full-Stack Feature Development:</strong> Developed the 'Job Application' module, engineering a multiple resume upload feature utilizing C# to process file collections and store paths securely in a PostgreSQL database.",
+                    "<strong>Real-Time Collaboration Tools:</strong> Built a dynamic comment and discussion section for the 'Planner Kanban' board. Implemented JavaScript AJAX calls to communicate asynchronously with ASP.NET controllers, allowing instant updates without full-page reloads.",
+                    "<strong>Performance Optimization:</strong> Optimized the 'Job Requisition' module by implementing server-side pagination, drastically reducing page load times for large datasets by fetching data in manageable chunks.",
+                    "<strong>UI/UX & Mobile Responsiveness:</strong> Redesigned the 'Leave Table' interface for mobile devices using Bootstrap utility classes, ensuring data remained readable and properly aligned on smaller screens.",
+                    "<strong>Advanced Bug Resolution:</strong> Successfully diagnosed and resolved a silent Model Binding data transmission failure in the 'Create Job Post' function by tracing data packets and correcting database schema mismatches.",
+                    "<strong>Version Control:</strong> Utilized GitHub for configuration management, handling branching, pull requests, and resolving complex merge conflicts in a shared development environment."
+                ],
+                images: [
+                    { src: "path/to/fig2.1.jpg", caption: "Figure 2.1: Multiple File Upload Feature" },
+                    { src: "path/to/fig2.2.jpg", caption: "Figure 2.2: Mobile view Leave Application" },
+                    { src: "path/to/fig2.3.jpg", caption: "Figure 2.3: Pagination UI Code Implementation" }
+                ]
+            },
+            edr: {
+                title: "Endpoint Detection and Response (EDR) Migration",
+                role: "IT Technical Support (Migration Task Force)",
+                tech: ["Microsoft Entra ID", "BitLocker", "Microsoft SSO", "Windows Registry", "PowerShell"],
+                overview: "A large-scale enterprise infrastructure initiative to upgrade corporate cybersecurity by migrating hundreds of endpoints from a legacy on-premise domain to a modern, Zero Trust cloud-hybrid model.",
+                tasks: [
+                    "<strong>Enterprise Domain Migration:</strong> Executed the critical 'Action 2' migration workflow, backing up user data, regenerating user profiles via Microsoft SSO, and connecting them to the new Microsoft Entra ID domain.",
+                    "<strong>Security Enforcement:</strong> Applied strict security policies across endpoints, including enforcing BitLocker Drive Encryption, ensuring OneDrive cloud synchronization, and verifying compliance through the Windows Security dashboard.",
+                    "<strong>Asset & Threat Management:</strong> Removed legacy Symantec antivirus software and installed new EDR agents and TMS asset tags to ensure active threat surveillance.",
+                    "<strong>Architectural Problem Solving:</strong> Devised a hardware workaround for a strict network security policy that blocked shared printing on GCOM devices by configuring a dedicated 'Non-GCOM' PC as a print server.",
+                    "<strong>Advanced Troubleshooting:</strong> Resolved complex domain authentication failures by performing Windows Registry clean-ups, resetting legacy proxy configurations via the command line, and flushing DNS caches."
+                ],
+                images: [
+                    { src: "path/to/fig2.17.jpg", caption: "Figure 2.17: Action 2 Migration Workflow" },
+                    { src: "path/to/fig2.9.jpg", caption: "Figure 2.9: 'Non-GCOM' Print Server Architecture" },
+                    { src: "path/to/fig2.8.jpg", caption: "Figure 2.8: Resolving Proxy Issues via Registry Editor" }
+                ]
+            },
+            quickbill: {
+                title: "QuickBill Web-Based System",
+                role: "UI/UX Designer & Frontend Developer",
+                tech: ["React", "Vite", "Tailwind CSS", "Canva"],
+                overview: "A lightweight, user-friendly billing and invoicing web platform designed to assist small and medium-sized enterprises (SMEs) in managing financial transactions without complex enterprise ERPs.",
+                tasks: [
+                    "<strong>UI/UX Prototyping:</strong> Visualized the application using Canva, creating high-fidelity mockups of the Login/Register pages, Dashboard, and Settings interface focusing on a clean, professional aesthetic.",
+                    "<strong>Modern Component Architecture:</strong> Transitioned designs into a production-ready application using React and Vite, constructing modular, reusable components (like navigation sidebars and data cards).",
+                    "<strong>Authentication & Client-Side Logic:</strong> Developed the Authentication Module, implementing state management for real-time form validation (e.g., email formats, password strength) prior to backend submission.",
+                    "<strong>Atomic Styling:</strong> Utilized Tailwind CSS utility classes to rapidly style components, adhering to responsive design principles to ensure a seamless experience across devices and browsers."
+                ],
+                images: [
+                    { src: "path/to/fig2.10.jpg", caption: "Figure 2.10: UI mockup of the QuickBill Dashboard" },
+                    { src: "path/to/fig2.11.jpg", caption: "Figure 2.11: Fully implemented Login Interface" }
+                ]
+            }
+        };
+
+        const modal = document.getElementById('projectModal');
+        const headerContainer = document.getElementById('modalHeader');
+        const bodyContainer = document.getElementById('modalBody');
+
+        function openModal(projectId) {
+            const data = projectData[projectId];
+            if (!data) return;
+
+            let techBadges = data.tech.map(t => `<span class="px-3 py-1 bg-neon/10 text-neon border border-neon/20 rounded-full text-xs font-mono">${t}</span>`).join('');
+            
+            headerContainer.innerHTML = `
+                <h2 class="text-2xl md:text-3xl font-bold text-white mb-2">${data.title}</h2>
+                <p class="text-slate-400 text-sm md:text-base font-medium mb-6">Role: <span class="text-white">${data.role}</span></p>
+                <div class="flex flex-wrap gap-2">${techBadges}</div>
+            `;
+
+            let tasksHtml = data.tasks.map(task => `<li class="pl-6 relative before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-2 before:h-2 before:bg-neon before:rounded-full text-slate-400 leading-relaxed">${task}</li>`).join('');
+            
+            let imagesHtml = data.images.map(img => `
+                <div class="flex flex-col gap-3">
+                    <div class="w-full aspect-video bg-deep border border-white/5 rounded-xl flex items-center justify-center shadow-lg overflow-hidden group">
+                        <span class="text-slate-600 text-sm group-hover:text-neon transition">Image Placeholder (Replace in code)</span>
+                        </div>
+                    <p class="text-center text-xs text-slate-500 font-mono italic">${img.caption}</p>
+                </div>
+            `).join('');
+
+            bodyContainer.innerHTML = `
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-neon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        Project Overview
+                    </h3>
+                    <p class="text-slate-400 leading-relaxed">${data.overview}</p>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-neon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" /></svg>
+                        Key Tasks & Contributions
+                    </h3>
+                    <ul class="space-y-4">${tasksHtml}</ul>
+                </div>
+
+                <div class="pt-8 border-t border-white/5">
+                    <h3 class="text-xl font-bold text-white mb-6">Project Gallery</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        ${imagesHtml}
+                    </div>
+                </div>
+            `;
+
+            modal.classList.remove('hidden');
+            modal.classList.add('modal-active');
+            document.body.style.overflow = 'hidden'; 
+        }
+
+        function closeModal() {
+            modal.classList.add('hidden');
+            modal.classList.remove('modal-active');
+            document.body.style.overflow = 'auto'; 
+        }
+
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
 </html>
